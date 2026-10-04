@@ -36,7 +36,10 @@ h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.05;text-wrap:balanc
 .progress{position:fixed;top:0;left:0;height:3px;width:calc(var(--p,0)*100%);background:linear-gradient(90deg,var(--teal),var(--amber));z-index:21}
 
 .stage{position:relative;z-index:1;height:100vh;height:100svh;overflow:hidden}
-.bgword{position:absolute;left:0;right:0;top:30%;text-align:center;white-space:nowrap;font:800 clamp(60px,15vw,240px)/1 var(--f-display);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(var(--hc),.45);z-index:1}
+.stitle{position:absolute;left:clamp(16px,6vw,90px);top:calc(env(safe-area-inset-top,0px) + 64px);z-index:6;display:flex;align-items:baseline;gap:10px;font:800 clamp(26px,3.2vw,42px)/1 var(--f-display);letter-spacing:-.02em;color:var(--fg);opacity:0;pointer-events:none;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.stitle small{font:600 12px var(--f-mono);color:var(--amber);letter-spacing:.1em}
+.stitle span::after{content:"";display:block;height:3px;width:46px;margin-top:8px;border-radius:2px;background:rgb(var(--hc))}
+.bgword{display:none;position:absolute;left:0;right:0;top:30%;text-align:center;white-space:nowrap;font:800 clamp(60px,15vw,240px)/1 var(--f-display);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(var(--hc),.45);z-index:1}
 .bgword::before,.bgword::after{content:attr(data-t);position:absolute;inset:0;-webkit-text-stroke:0;opacity:0}
 .bgword::before{color:rgba(255,107,139,.5);animation:g1 3.2s steps(1) infinite}
 .bgword::after{color:rgba(79,209,197,.45);animation:g2 3.2s steps(1) infinite}
@@ -106,10 +109,10 @@ h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.05;text-wrap:balanc
 .lab em{font:600 11px var(--f-mono);font-style:normal;color:var(--amber);letter-spacing:.1em}
 .lab h3{font-size:clamp(19px,2.1vw,26px);margin-top:4px}
 .lab p{margin:6px 0 0;color:var(--muted);font-size:14px}
-.s-do .lab:nth-child(1){left:6vw;top:16%}
-.s-do .lab:nth-child(2){right:6vw;top:26%}
-.s-do .lab:nth-child(3){left:6vw;top:50%}
-.s-do .lab:nth-child(4){right:6vw;top:60%}
+.s-do .lab:nth-child(1){left:6vw;top:20%}
+.s-do .lab:nth-child(2){right:6vw;top:30%}
+.s-do .lab:nth-child(3){left:6vw;top:54%}
+.s-do .lab:nth-child(4){right:6vw;top:64%}
 
 /* experience */
 .xc{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center}
@@ -126,7 +129,19 @@ h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.05;text-wrap:balanc
 .s-impact .ib:nth-child(1){left:6vw;top:15%}.s-impact .ib:nth-child(2){left:11vw;top:40%}.s-impact .ib:nth-child(3){left:6vw;top:65%}
 .s-impact .ib:nth-child(4){right:6vw;top:15%}.s-impact .ib:nth-child(5){right:11vw;top:40%}.s-impact .ib:nth-child(6){right:6vw;top:65%}
 
-/* skills orbit */
+/* bubble flips to the left when the photo moves aside */
+.dwrap.aside .bubble{left:auto;right:76%;border-radius:16px 16px 4px 16px;transform-origin:100% 100%}
+.dwrap.aside .bubble::after{left:auto;right:4px;border-left-color:transparent;border-right-color:var(--amber)}
+/* skills groups */
+.skside{width:min(660px,52vw)}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.skc{padding:12px 14px}
+.skc h4{margin:0 0 8px;font:700 13px var(--f-display);color:rgb(var(--kc));letter-spacing:.02em;display:flex;align-items:center;gap:7px}
+.skc h4::before{content:"";width:8px;height:8px;border-radius:50%;background:rgb(var(--kc))}
+.skc .cl{display:flex;flex-wrap:wrap;gap:5px}
+.skc .cl span{font:500 12px var(--f-body);padding:4px 8px;border-radius:7px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.skc .cl span.hot{border-color:rgba(var(--kc),.55);color:rgb(var(--kc))}
+/* old orbit (unused) */
 .orb{position:absolute;left:50%;top:46%;white-space:nowrap;font:600 13px var(--f-body);padding:8px 12px;border-radius:999px;background:rgba(17,25,37,.92);border:1px solid var(--line);display:flex;align-items:center;gap:7px}
 .orb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c,var(--amber))}
 .orb.hot{border-color:rgba(255,181,71,.6);color:var(--amber)}
@@ -203,20 +218,25 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
   .toasts{left:6%;top:58%}
   .toasts span{font-size:10px;right:auto;left:0}
   .bubble{left:58%;top:-2%;font-size:12px;padding:8px 11px}
-  .bgword{top:40%}
+  .stitle{font-size:24px;left:16px;top:calc(env(safe-area-inset-top,0px) + 60px)}
   .intro-text{top:70px;transform:none;left:16px;right:16px;max-width:none}
   .intro-text h1{font-size:clamp(38px,11vw,60px)}
   .hi{margin-top:10px;font-size:15px}
   .lab{left:16px!important;right:16px!important;width:auto;padding:10px 14px}
   .lab p{display:none}
   .lab h3{font-size:18px}
-  .s-do .lab:nth-child(1){top:68px}.s-do .lab:nth-child(2){top:130px}.s-do .lab:nth-child(3){top:192px}.s-do .lab:nth-child(4){top:254px}
-  .side{left:16px;right:16px;width:auto;top:68px;transform:none;gap:10px}
+  .s-do .lab:nth-child(1){top:106px}.s-do .lab:nth-child(2){top:180px}.s-do .lab:nth-child(3){top:254px}.s-do .lab:nth-child(4){top:328px}
+  .side{left:16px;right:16px;width:auto;top:108px;transform:none;gap:10px}
   .xc .yr{font-size:24px;min-width:60px}
   .s-impact .igrid{position:absolute;left:16px;right:16px;top:68px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .s-impact .ib{position:relative;left:auto!important;right:auto!important;top:auto!important;width:auto}
   .ib b{font-size:22px}.ib span{font-size:12px}
-  .orb{font-size:11px;padding:6px 9px}
+  .skside{width:auto}
+  .sgrid{gap:7px}
+  .skc{padding:8px 9px}
+  .skc h4{font-size:11px;margin-bottom:5px}
+  .skc .cl{gap:3px}
+  .skc .cl span{font-size:10px;padding:2px 5px;border-radius:5px}
   .lab .tools{display:none}
   .gh h3{font-size:17px}
   .lv{padding:10px 12px}.lv b{font-size:15px}.lv span{display:none}
@@ -227,11 +247,11 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
 /* static fallback: everything visible as a normal page */
 .static .stage{height:auto;overflow:visible;padding:70px 16px 40px;display:flex;flex-direction:column;gap:18px}
 .static .dwrap{position:relative;left:auto;right:auto;margin:0 auto;height:auto;width:min(92vw,420px);bottom:auto;order:-1}
-.static .bgword,.static .ctrl,.static .toasts,.static .shine,.static .scan,.static .ghost{display:none}
+.static .stitle,.static .bgword,.static .ctrl,.static .toasts,.static .shine,.static .scan,.static .ghost{display:none}
 .static .scene{position:relative;inset:auto}
 .static .intro-text,.static .side,.static .s-impact .igrid{position:relative;left:auto;right:auto;top:auto;transform:none;max-width:none;width:auto}
 .static .lab,.static .ib{position:relative!important;left:auto!important;right:auto!important;top:auto!important;width:auto;margin-bottom:10px}
-.static .s-skills{display:flex;flex-wrap:wrap;gap:8px}
+
 .static .orb{position:relative;left:auto;top:auto}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -248,7 +268,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     <button class="jump hit" type="button" id="toContact">Contact</button>
   </header>
 
-  <div class="bgword" id="bgword" data-t="VISHAKHA" aria-hidden="true">VISHAKHA</div>
+  <div class="stitle" id="stitle" aria-live="polite"><small id="snum">01</small><span id="sname">WHAT I DO</span></div>
 
   <div class="dwrap" id="dwrap">
     <div class="me-glow" aria-hidden="true"></div>
@@ -309,7 +329,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     </div>
   </section>
 
-  <section class="scene s-skills" id="orbit" aria-label="Skills"></section>
+  <section class="scene s-skills" aria-label="Skills"><div class="side skside"><div class="sgrid" id="skillGrid"></div></div></section>
 
   <section class="scene s-proj" aria-label="Projects">
     <div class="side">
@@ -362,10 +382,18 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
   const n=$('#name');let li=0;
   n.innerHTML=n.textContent.split(' ').map(w=>'<span style="white-space:nowrap">'+w.split('').map(c=>`<span class="l" aria-hidden="true">${c}</span>`).join('')+'</span>').join(' ');
 
-  // skills orbit chips
-  const skills=[['SSIS',1],['SQL Server',1],['Databricks',1],['PySpark',1],['Azure Data Factory',1],['ADLS Gen2'],['Delta Lake'],['Unity Catalog'],['Snowflake'],['DataStage'],['T-SQL'],['Python',1],['Pandas'],['FastAPI'],['LangGraph',1],['MCP',1],['AI Agents',1],['Power BI'],['PostgreSQL'],['Oracle'],['CDC'],['Star Schema'],['Data Quality'],['Git']];
-  const cols=['var(--amber)','var(--teal)','var(--rose)'];
-  skills.forEach((s,i)=>{const e=document.createElement('span');e.className='orb'+(s[1]?' hot':'');e.textContent=s[0];e.style.setProperty('--c',cols[i%3]);$('#orbit').appendChild(e)});
+  // skills, grouped (* = highlight)
+  const groups=[
+    ['Data Engineering','255,181,71',['ETL / ELT*','Data Warehousing*','CDC & Incremental Loads','Star Schema','Medallion Architecture','Data Quality']],
+    ['ETL & Scheduling','79,209,197',['SSIS*','DataStage*','Azure Data Factory*','Autosys','Tivoli Scheduler']],
+    ['Databases & SQL','255,107,139',['SQL*','T-SQL','Stored Procedures','SQL Server*','Oracle','PostgreSQL','DBMS']],
+    ['Cloud & Lakehouse','79,209,197',['Databricks*','PySpark','Delta Lake','Unity Catalog','ADLS Gen2','Snowflake']],
+    ['AI & Automation','255,181,71',['AI Agents*','LangGraph','MCP*','GitHub Copilot*','LLM Apps','Python*']],
+    ['BI & Reporting','255,107,139',['Power BI*','MicroStrategy*']],
+    ['Tools & Version Control','79,209,197',['Git','GitHub','TFS','SVN','Visual Studio','VS Code','Jira','Confluence']],
+    ['Leadership','255,181,71',['Team Leadership*','Agile / Scrum','Stakeholder Demos','Production Support']]
+  ];
+  $('#skillGrid').innerHTML=groups.map(([t,c,items])=>`<div class="skc card" style="--kc:${c}"><h4>${t}</h4><div class="cl">${items.map(x=>x.endsWith('*')?`<span class="hot">${x.slice(0,-1)}</span>`:`<span>${x}</span>`).join('')}</div></div>`).join('');
 
   // copy email
   const cp=$('#copy');
@@ -466,7 +494,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     {k:'intro',w:'VISHAKHA',b:"Hi, I'm Vishakha!",hc:'255,181,71'},
     {k:'do',w:'WHAT I DO',b:"Here's what I do",hc:'79,209,197'},
     {k:'exp',w:'EXPERIENCE',b:'8+ years, 3 companies',hc:'255,107,139'},
-    {k:'grow',w:'LEARNING',b:'Always levelling up!',hc:'255,181,71'},
+    {k:'grow',w:'LEVELLING UP',b:'Always levelling up!',hc:'255,181,71'},
     {k:'skills',w:'SKILLS',b:'My toolkit!',hc:'79,209,197'},
     {k:'proj',w:'PROJECTS',b:'Some things I built',hc:'255,181,71'},
     {k:'edu',w:'EDUCATION',b:'Engineer at heart',hc:'255,107,139'},
@@ -476,25 +504,22 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
   scenes.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Go to '+s.w.toLowerCase());b.onclick=()=>jump(i);dotsEl.appendChild(b)});
   const dots=[...dotsEl.children];
 
-  const bg=$('#bgword'),bub=$('#bubble');
+  const sname=$('#sname'),snum=$('#snum'),stitle=$('#stitle'),bub=$('#bubble');
   let cur=-1,scr=null;
   function scramble(el,txt){clearInterval(scr);const ch='#/<>_01';let f=0;const N=16;el.dataset.t=txt;
     scr=setInterval(()=>{f++;el.textContent=txt.split('').map((c,i)=>c===' '?' ':(i<txt.length*f/N?c:ch[Math.random()*ch.length|0])).join('');if(f>=N){clearInterval(scr);el.textContent=txt}},35)}
-  function setScene(i){if(i===cur)return;const first=cur<0;cur=i;const s=scenes[i];if(!first){glitch();sfx.whoosh()}scramble(bg,s.w);bub.textContent=s.b;
+  function setScene(i){if(i===cur)return;const first=cur<0;cur=i;const s=scenes[i];if(!first){glitch();sfx.whoosh()}if(i===0){gsap.to(stitle,{autoAlpha:0,duration:.3})}else{snum.textContent=String(i+1).padStart(2,'0');scramble(sname,s.w);gsap.fromTo(stitle,{autoAlpha:0,x:-30},{autoAlpha:1,x:0,duration:.5,ease:'back.out(2)'})}bub.textContent=s.b;
     gsap.fromTo(bub,{scale:.4,rotate:-8},{scale:1,rotate:0,duration:.5,ease:'back.out(2.5)'});
     document.documentElement.style.setProperty('--hc',s.hc);
+    bub.style.visibility=(mob()&&i>0)?'hidden':'visible';
+    $('.dwrap').classList.toggle('aside',!mob()&&['exp','grow','skills','proj','edu','contact'].includes(s.k));
     dots.forEach((d,j)=>d.classList.toggle('on',j===i))}
 
   const mob=()=>innerWidth<=820;
-  const orbs=$$('.orb');
-  function op(i){const N=orbs.length,a=i/N*Math.PI*2-Math.PI/2+(i%2?.12:0),k=i%2?1:.74;
-    const rx=mob()?innerWidth*.40:Math.min(innerWidth*.42,560),ry=mob()?innerHeight*.34:Math.min(innerHeight*.36,320);
-    return{x:Math.cos(a)*rx*k,y:Math.sin(a)*ry*k}}
   const aside=()=>mob()?{x:0,opacity:.22}:{x:-innerWidth*.2,opacity:1};
 
   gsap.set('.dwrap',{xPercent:0});
-  gsap.set(['.s-do','.s-exp','.s-impact','.s-skills','.s-proj','.s-edu','.s-contact'],{autoAlpha:0});
-  gsap.set(orbs,{xPercent:-50,yPercent:-50});
+  gsap.set(['.s-do','.s-exp','.s-grow','.s-skills','.s-proj','.s-edu','.s-contact'],{autoAlpha:0});
 
   const HOLD=3.2;
   const tl=gsap.timeline({paused:true,defaults:{ease:'power2.out'},onUpdate:upd,onComplete:ended});
@@ -538,10 +563,11 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
   // 5 skills
     .addLabel('skills')
     .set('.s-skills',{autoAlpha:1})
-    .to('.dwrap',{x:0,opacity:()=>mob()?.3:1,duration:.5})
-    .fromTo(orbs,{x:0,y:0,scale:0,autoAlpha:0},{x:i=>op(i).x,y:i=>op(i).y,scale:1,autoAlpha:1,duration:.9,stagger:.08,ease:'back.out(1.7)'})
-    .to({}, {duration:HOLD})
-    .to(orbs,{x:0,y:0,scale:0,autoAlpha:0,duration:.6,stagger:.015,ease:'back.in(1.5)'})
+    .to('.dwrap',{x:()=>aside().x,opacity:()=>aside().opacity,duration:.6})
+    .fromTo('.skc',{autoAlpha:0,y:40,scale:.85},{autoAlpha:1,y:0,scale:1,duration:.45,stagger:.4,ease:'back.out(1.8)'},'-=.3')
+    .fromTo('.skc .cl span',{scale:0},{scale:1,duration:.3,stagger:.03,ease:'back.out(2.5)'},'<+.15')
+    .to({}, {duration:HOLD+1.8})
+    .to('.skc',{autoAlpha:0,y:-30,duration:.35,stagger:.04})
     .set('.s-skills',{autoAlpha:0})
   // 6 projects
     .addLabel('proj')
