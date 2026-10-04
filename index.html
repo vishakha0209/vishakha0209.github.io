@@ -129,6 +129,31 @@ h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.05;text-wrap:balanc
 .s-impact .ib:nth-child(1){left:6vw;top:15%}.s-impact .ib:nth-child(2){left:11vw;top:40%}.s-impact .ib:nth-child(3){left:6vw;top:65%}
 .s-impact .ib:nth-child(4){right:6vw;top:15%}.s-impact .ib:nth-child(5){right:11vw;top:40%}.s-impact .ib:nth-child(6){right:6vw;top:65%}
 
+/* big title slam */
+.veil{position:absolute;inset:0;z-index:11;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,rgba(10,15,23,.55),rgba(10,15,23,.92) 75%)}
+.bigword{position:absolute;left:0;right:0;top:30%;z-index:1;text-align:center;white-space:nowrap;pointer-events:none;opacity:.16;transform-origin:50% 50%}
+.bigword small{display:block;font:600 clamp(12px,1.2vw,15px) var(--f-mono);letter-spacing:.35em;color:rgb(var(--hc));margin-bottom:10px;opacity:0}
+.bigword b{position:relative;display:inline-block;font:800 var(--bws,clamp(56px,13vw,200px))/1 var(--f-display);letter-spacing:-.035em;color:transparent;-webkit-text-stroke:1.5px rgba(var(--hc),.7)}
+.bigword.slam small{opacity:1}
+.bigword.slam b{-webkit-text-stroke:0;background:linear-gradient(100deg,rgb(var(--hc)) 5%,#FFF7EA 42%,#ffffff 50%,rgb(var(--hc)) 95%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 12px 40px rgba(0,0,0,.65))}
+.bigword b::before,.bigword b::after{content:attr(data-t);position:absolute;inset:0;opacity:0;-webkit-text-stroke:0;-webkit-text-fill-color:currentColor}
+.bigword b::before{color:rgba(255,107,139,.85)}
+.bigword b::after{color:rgba(79,209,197,.8)}
+.bigword.gl b::before{animation:bwg1 .7s steps(2) 1}
+.bigword.gl b::after{animation:bwg2 .7s steps(2) 1}
+@keyframes bwg1{0%,100%{opacity:0}10%,75%{opacity:.9;clip-path:inset(18% 0 58% 0);transform:translate(-10px)}40%{clip-path:inset(62% 0 8% 0);transform:translate(8px)}}
+@keyframes bwg2{0%,100%{opacity:0}15%,80%{opacity:.85;clip-path:inset(48% 0 22% 0);transform:translate(10px)}55%{clip-path:inset(4% 0 72% 0);transform:translate(-7px)}}
+/* skills orbit (desktop) */
+.orbit,.legend{display:none}
+.orb{position:absolute;left:50%;top:50%;white-space:nowrap;display:flex;align-items:center;gap:7px;font:500 13px var(--f-body);color:var(--fg);padding:7px 12px;border-radius:999px;background:rgba(14,20,30,.88);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(6px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.orb::before{content:"";width:7px;height:7px;border-radius:50%;background:rgb(var(--kc));box-shadow:0 0 8px rgb(var(--kc))}
+.orb.big{font:600 15px var(--f-body);padding:9px 15px;border-color:rgba(var(--kc),.6);box-shadow:0 0 22px rgba(var(--kc),.28),0 8px 24px rgba(0,0,0,.4)}
+.orb.big::after{content:"";position:absolute;inset:-1px;border-radius:inherit;border:1px solid rgba(var(--kc),.6);animation:orbpulse 2.6s ease-out infinite;animation-delay:calc(var(--d)*-.4s)}
+@keyframes orbpulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35);opacity:0}}
+.legend{position:absolute;left:50%;bottom:64px;translate:-50% 0;gap:16px;flex-wrap:wrap;justify-content:center;font:500 12px var(--f-body);color:var(--muted);padding:8px 16px;border-radius:999px;background:rgba(14,20,30,.8);border:1px solid var(--line)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend span::before{content:"";width:8px;height:8px;border-radius:50%;background:rgb(var(--kc))}
+@media (min-width:821px){.orbit{display:block}.legend{display:flex}.s-skills .skside{display:none}}
 /* bubble flips to the left when the photo moves aside */
 .dwrap.aside .bubble{left:auto;right:76%;border-radius:16px 16px 4px 16px;transform-origin:100% 100%}
 .dwrap.aside .bubble::after{left:auto;right:4px;border-left-color:transparent;border-right-color:var(--amber)}
@@ -218,6 +243,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
   .toasts{left:6%;top:58%}
   .toasts span{font-size:10px;right:auto;left:0}
   .bubble{left:58%;top:-2%;font-size:12px;padding:8px 11px}
+  .bigword{top:42%}
   .stitle{font-size:24px;left:16px;top:calc(env(safe-area-inset-top,0px) + 60px)}
   .intro-text{top:70px;transform:none;left:16px;right:16px;max-width:none}
   .intro-text h1{font-size:clamp(38px,11vw,60px)}
@@ -247,7 +273,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
 /* static fallback: everything visible as a normal page */
 .static .stage{height:auto;overflow:visible;padding:70px 16px 40px;display:flex;flex-direction:column;gap:18px}
 .static .dwrap{position:relative;left:auto;right:auto;margin:0 auto;height:auto;width:min(92vw,420px);bottom:auto;order:-1}
-.static .stitle,.static .bgword,.static .ctrl,.static .toasts,.static .shine,.static .scan,.static .ghost{display:none}
+.static .veil,.static .bigword,.static .orbit,.static .legend,.static .stitle,.static .bgword,.static .ctrl,.static .toasts,.static .shine,.static .scan,.static .ghost{display:none}
 .static .scene{position:relative;inset:auto}
 .static .intro-text,.static .side,.static .s-impact .igrid{position:relative;left:auto;right:auto;top:auto;transform:none;max-width:none;width:auto}
 .static .lab,.static .ib{position:relative!important;left:auto!important;right:auto!important;top:auto!important;width:auto;margin-bottom:10px}
@@ -268,6 +294,8 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     <button class="jump hit" type="button" id="toContact">Contact</button>
   </header>
 
+  <div class="bigword" id="bigword" aria-hidden="true"><small id="bwnum"></small><b id="bwtxt" data-t="VISHAKHA">VISHAKHA</b></div>
+  <div class="veil" id="veil" aria-hidden="true"></div>
   <div class="stitle" id="stitle" aria-live="polite"><small id="snum">01</small><span id="sname">WHAT I DO</span></div>
 
   <div class="dwrap" id="dwrap">
@@ -329,7 +357,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     </div>
   </section>
 
-  <section class="scene s-skills" aria-label="Skills"><div class="side skside"><div class="sgrid" id="skillGrid"></div></div></section>
+  <section class="scene s-skills" aria-label="Skills"><div class="orbit" id="orbit"></div><div class="legend" id="legend"></div><div class="side skside"><div class="sgrid" id="skillGrid"></div></div></section>
 
   <section class="scene s-proj" aria-label="Projects">
     <div class="side">
@@ -393,6 +421,13 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     ['Tools & Version Control','79,209,197',['Git','GitHub','TFS','SVN','Visual Studio','VS Code','Jira','Confluence']],
     ['Leadership','255,181,71',['Team Leadership*','Agile / Scrum','Stakeholder Demos','Production Support']]
   ];
+  const orbitSkip=new Set(['CDC & Incremental Loads','Medallion Architecture','Stored Procedures','LLM Apps','Jira','Confluence','Stakeholder Demos','Production Support']);
+  const ORB=[];
+  groups.forEach(([t,c,items])=>items.forEach(x=>{const hot=x.endsWith('*'),name=hot?x.slice(0,-1):x;if(orbitSkip.has(name))return;
+    const e=document.createElement('span');e.className='orb'+(hot?' big':'');e.textContent=name;e.style.setProperty('--kc',c);e.style.setProperty('--d',ORB.length);
+    $('#orbit').appendChild(e);ORB.push({el:e,ring:hot?0:1,r:0,a:0})}));
+  [0,1].forEach(ring=>{const L=ORB.filter(o=>o.ring===ring);L.forEach((o,k)=>o.a=k/L.length*Math.PI*2+(ring?0.13:0))});
+  $('#legend').innerHTML=groups.map(([t,c])=>`<span style="--kc:${c}">${t}</span>`).join('');
   $('#skillGrid').innerHTML=groups.map(([t,c,items])=>`<div class="skc card" style="--kc:${c}"><h4>${t}</h4><div class="cl">${items.map(x=>x.endsWith('*')?`<span class="hot">${x.slice(0,-1)}</span>`:`<span>${x}</span>`).join('')}</div></div>`).join('');
 
   // copy email
@@ -505,14 +540,31 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
   const dots=[...dotsEl.children];
 
   const sname=$('#sname'),snum=$('#snum'),stitle=$('#stitle'),bub=$('#bubble');
+  const bw=$('#bigword'),bwtxt=$('#bwtxt'),bwnum=$('#bwnum'),veil=$('#veil');
+  let slamTl=null;
+  function fitBig(txt){const fs=Math.min(innerWidth*.9/(txt.length*.64),innerWidth<=820?84:200);bw.style.setProperty('--bws',fs+'px')}
+  function slam(i,txt){
+    if(slamTl)slamTl.kill();
+    bwtxt.textContent=txt;bwtxt.dataset.t=txt;bwnum.textContent=String(i+1).padStart(2,'0')+' / '+String(scenes.length).padStart(2,'0');fitBig(txt);
+    bw.classList.remove('gl');bw.classList.add('slam');
+    slamTl=gsap.timeline()
+      .set(bw,{zIndex:12})
+      .fromTo(veil,{opacity:0},{opacity:1,duration:.25},0)
+      .fromTo(bw,{opacity:0,scale:1.35,filter:'blur(14px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.5,ease:'expo.out'},0)
+      .set(bw,{clearProps:'filter'})
+      .call(()=>{void bw.offsetWidth;bw.classList.add('gl')})
+      .to({}, {duration:.55})
+      .to(veil,{opacity:0,duration:.45})
+      .to(bw,{opacity:.16,scale:.9,duration:.5,ease:'power2.inOut',onStart:()=>bw.classList.remove('slam'),onComplete:()=>{gsap.set(bw,{zIndex:1});bw.classList.remove('gl')}},'<');
+  }
   let cur=-1,scr=null;
   function scramble(el,txt){clearInterval(scr);const ch='#/<>_01';let f=0;const N=16;el.dataset.t=txt;
     scr=setInterval(()=>{f++;el.textContent=txt.split('').map((c,i)=>c===' '?' ':(i<txt.length*f/N?c:ch[Math.random()*ch.length|0])).join('');if(f>=N){clearInterval(scr);el.textContent=txt}},35)}
-  function setScene(i){if(i===cur)return;const first=cur<0;cur=i;const s=scenes[i];if(!first){glitch();sfx.whoosh()}if(i===0){gsap.to(stitle,{autoAlpha:0,duration:.3})}else{snum.textContent=String(i+1).padStart(2,'0');scramble(sname,s.w);gsap.fromTo(stitle,{autoAlpha:0,x:-30},{autoAlpha:1,x:0,duration:.5,ease:'back.out(2)'})}bub.textContent=s.b;
+  function setScene(i){if(i===cur)return;const first=cur<0;cur=i;const s=scenes[i];if(!first){glitch();sfx.whoosh()}if(i===0){gsap.to(stitle,{autoAlpha:0,duration:.3});if(!first){if(slamTl)slamTl.kill();gsap.set(veil,{opacity:0});bw.classList.remove('slam','gl');bwtxt.textContent='VISHAKHA';bwtxt.dataset.t='VISHAKHA';fitBig('VISHAKHA');gsap.set(bw,{opacity:.16,scale:1,zIndex:1})}}else{snum.textContent=String(i+1).padStart(2,'0');sname.textContent=s.w;slam(i,s.w);gsap.fromTo(stitle,{autoAlpha:0,x:-30},{autoAlpha:1,x:0,duration:.5,delay:1.05,ease:'back.out(2)'})}bub.textContent=s.b;
     gsap.fromTo(bub,{scale:.4,rotate:-8},{scale:1,rotate:0,duration:.5,ease:'back.out(2.5)'});
     document.documentElement.style.setProperty('--hc',s.hc);
-    bub.style.visibility=(mob()&&i>0)?'hidden':'visible';
-    $('.dwrap').classList.toggle('aside',!mob()&&['exp','grow','skills','proj','edu','contact'].includes(s.k));
+    bub.style.visibility=((mob()&&i>0)||s.k==='skills')?'hidden':'visible';
+    $('.dwrap').classList.toggle('aside',!mob()&&['exp','grow','proj','edu','contact'].includes(s.k));
     dots.forEach((d,j)=>d.classList.toggle('on',j===i))}
 
   const mob=()=>innerWidth<=820;
@@ -521,6 +573,10 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
   gsap.set('.dwrap',{xPercent:0});
   gsap.set(['.s-do','.s-exp','.s-grow','.s-skills','.s-proj','.s-edu','.s-contact'],{autoAlpha:0});
 
+  gsap.set(ORB.map(o=>o.el),{xPercent:-50,yPercent:-50,scale:0,autoAlpha:0});
+  gsap.ticker.add(()=>{if(mob())return;const t=performance.now()/1000,RX=Math.min(innerWidth*.45,640),RY=Math.min(innerHeight*.36,280);
+    for(const o of ORB){if(o.r<=0.001)continue;const rx=o.ring?RX:RX*.62,ry=o.ring?RY:RY*.6,a=o.a+t*(o.ring?.06:-.09);
+      gsap.set(o.el,{x:Math.cos(a)*rx*o.r,y:Math.sin(a)*ry*o.r})}});
   const HOLD=3.2;
   const tl=gsap.timeline({paused:true,defaults:{ease:'power2.out'},onUpdate:upd,onComplete:ended});
 
@@ -536,6 +592,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     .to('.intro-text',{autoAlpha:0,x:-80,duration:.5})
   // 2 what I do
     .addLabel('do')
+    .to({}, {duration:1.1})
     .set('.s-do',{autoAlpha:1})
     .fromTo('.lab',{autoAlpha:0,x:i=>i%2?160:-160,scale:.8,rotate:i=>i%2?6:-6},{autoAlpha:1,x:0,scale:1,rotate:0,duration:.6,stagger:.7,ease:'back.out(1.6)'})
     .to({}, {duration:HOLD})
@@ -543,6 +600,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     .set('.s-do',{autoAlpha:0})
   // 3 experience
     .addLabel('exp')
+    .to({}, {duration:1.1})
     .set('.s-exp',{autoAlpha:1})
     .to('.dwrap',{x:()=>aside().x,opacity:()=>aside().opacity,duration:.7})
     .fromTo('.xc',{autoAlpha:0,x:160,rotate:5},{autoAlpha:1,x:0,rotate:0,duration:.6,stagger:.7,ease:'back.out(1.4)'},'-=.3')
@@ -551,6 +609,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     .set('.s-exp',{autoAlpha:0})
   // 4 levelling up
     .addLabel('grow')
+    .to({}, {duration:1.1})
     .set('.s-grow',{autoAlpha:1})
     .fromTo('.s-grow .gh',{autoAlpha:0,y:30,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.5,ease:'back.out(1.8)'})
     .fromTo('.cap1, .from span',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.35,stagger:.12,ease:'back.out(2.2)'})
@@ -562,15 +621,22 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     .set('.s-grow',{autoAlpha:0})
   // 5 skills
     .addLabel('skills')
+    .to({}, {duration:1.1})
     .set('.s-skills',{autoAlpha:1})
-    .to('.dwrap',{x:()=>aside().x,opacity:()=>aside().opacity,duration:.6})
-    .fromTo('.skc',{autoAlpha:0,y:40,scale:.85},{autoAlpha:1,y:0,scale:1,duration:.45,stagger:.4,ease:'back.out(1.8)'},'-=.3')
-    .fromTo('.skc .cl span',{scale:0},{scale:1,duration:.3,stagger:.03,ease:'back.out(2.5)'},'<+.15')
-    .to({}, {duration:HOLD+1.8})
-    .to('.skc',{autoAlpha:0,y:-30,duration:.35,stagger:.04})
+    .to('.dwrap',{x:0,opacity:()=>mob()?.22:1,duration:.6})
+    .fromTo(ORB,{r:0},{r:1,duration:1.1,stagger:.045,ease:'back.out(1.5)'},'<')
+    .fromTo(ORB.map(o=>o.el),{scale:0,autoAlpha:0},{scale:1,autoAlpha:1,duration:.6,stagger:.045,ease:'back.out(2)'},'<')
+    .fromTo('.legend span',{autoAlpha:0,y:10},{autoAlpha:1,y:0,duration:.3,stagger:.08},'-=.8')
+    .fromTo('.skc',{autoAlpha:0,y:40,scale:.85},{autoAlpha:1,y:0,scale:1,duration:.45,stagger:.3,ease:'back.out(1.8)'},'<-1.2')
+    .fromTo('.skc .cl span',{scale:0},{scale:1,duration:.3,stagger:.025,ease:'back.out(2.5)'},'<+.15')
+    .to({}, {duration:HOLD+2.2})
+    .to(ORB,{r:0,duration:.6,stagger:.01,ease:'back.in(1.4)'})
+    .to(ORB.map(o=>o.el),{scale:0,autoAlpha:0,duration:.5,stagger:.01},'<')
+    .to('.skc, .legend span',{autoAlpha:0,duration:.3},'<')
     .set('.s-skills',{autoAlpha:0})
   // 6 projects
     .addLabel('proj')
+    .to({}, {duration:1.1})
     .set('.s-proj',{autoAlpha:1})
     .to('.dwrap',{x:()=>aside().x,opacity:()=>aside().opacity,duration:.7})
     .fromTo('.pj',{autoAlpha:0,y:60,scale:.8,rotate:i=>i%2?6:-6},{autoAlpha:1,y:0,scale:1,rotate:0,duration:.6,stagger:.6,ease:'back.out(1.6)'},'-=.3')
@@ -579,6 +645,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     .set('.s-proj',{autoAlpha:0})
   // 7 education
     .addLabel('edu')
+    .to({}, {duration:1.1})
     .set('.s-edu',{autoAlpha:1})
     .fromTo('.s-edu .card',{autoAlpha:0,x:160},{autoAlpha:1,x:0,duration:.6,stagger:.6,ease:'back.out(1.4)'})
     .to({}, {duration:HOLD})
@@ -586,6 +653,7 @@ a.pj:hover{border-color:rgba(255,181,71,.6);transform:translateY(-3px)}
     .set('.s-edu',{autoAlpha:0})
   // 8 contact
     .addLabel('contact')
+    .to({}, {duration:1.1})
     .set('.s-contact',{autoAlpha:1})
     .fromTo('.s-contact .card, .s-contact .btn',{autoAlpha:0,y:40,scale:.85},{autoAlpha:1,y:0,scale:1,duration:.5,stagger:.25,ease:'back.out(1.8)'})
     .to({}, {duration:.5});
