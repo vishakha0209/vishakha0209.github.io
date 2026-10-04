@@ -15,7 +15,7 @@ I'm a Tech Lead in data engineering with 8+ years of experience in ETL, data war
 | Experience | Aristocrat Technologies, IBM, Infosys |
 | Learning | My move from classic ETL (SSIS, DataStage) to Databricks, Azure, Snowflake and AI agents |
 | Skills | 24 tools and technologies in an animated orbit |
-| Projects | Retail Lakehouse, Azure Sales Pipeline, AI Ticket Triage Agent |
+| Projects | Retail Lakehouse, Azure Sales Pipeline, AI Ticket Triage Agent, knowledgelake |
 | Education | M.Tech Power Systems (Branch Topper, GATE), B.Tech EEE (University Rank Holder) |
 | Contact | LinkedIn, GitHub, Instagram and email |
 
@@ -36,6 +36,7 @@ It's a single `index.html` with no build step and no server, hosted free on GitH
 - [Retail_Q](https://github.com/vishakha0209/Retail_Q): multi-source retail lakehouse on Databricks (Lakeflow, Auto Loader, Unity Catalog)
 - [azure_sales_data_engineering](https://github.com/vishakha0209/azure_sales_data_engineering): medallion pipeline in Azure Data Factory feeding Power BI
 - [ticket-triage-agent](https://github.com/vishakha0209/ticket-triage-agent): local AI agent that resolves or escalates support tickets
+- [knowledgelake](https://github.com/vishakha0209/knowledgelake): turns messy PDFs, scans and screenshots into a de-duplicated, searchable knowledge base (OCR, topic discovery, record-linkage dedup, hybrid RAG)
 
 ## Contact
 
